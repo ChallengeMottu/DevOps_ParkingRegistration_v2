@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ORMjznwaMP8=",
+  "dgSpecHash": "ipYfRc/FP2Q=",
   "success": true,
-  "projectFilePath": "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\Dotnet\\ParkingRegistration\\ParkingRegistration\\PulseSystem.API.Tests\\PulseSystem.API.Tests.csproj",
+  "projectFilePath": "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\devops\\DevOps ParkingRegistration\\ParkingRegistration\\PulseSystem.API.Tests\\PulseSystem.API.Tests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gabis\\.nuget\\packages\\asp.versioning.abstractions\\8.1.0\\asp.versioning.abstractions.8.1.0.nupkg.sha512",
     "C:\\Users\\gabis\\.nuget\\packages\\asp.versioning.http\\8.1.0\\asp.versioning.http.8.1.0.nupkg.sha512",

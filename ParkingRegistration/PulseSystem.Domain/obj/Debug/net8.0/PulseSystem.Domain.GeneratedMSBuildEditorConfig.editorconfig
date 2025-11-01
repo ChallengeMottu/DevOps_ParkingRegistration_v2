@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PulseSystem.Domain
-build_property.ProjectDir = C:\Users\gabis\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\Área de Trabalho\Challenge\Dotnet\ParkingRegistration\ParkingRegistration\PulseSystem.Domain\
+build_property.ProjectDir = C:\Users\gabis\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\Área de Trabalho\Challenge\devops\DevOps ParkingRegistration\ParkingRegistration\PulseSystem.Domain\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

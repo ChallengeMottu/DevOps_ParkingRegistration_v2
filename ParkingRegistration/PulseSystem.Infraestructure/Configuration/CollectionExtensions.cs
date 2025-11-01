@@ -17,7 +17,7 @@ public static class CollectionExtensions
 
         services.AddDbContext<PulseSystemContext>(options =>
 
-            options.UseOracle(configuration.GetConnectionString("SystemPulse")));
+            options.UseSqlServer(configuration.GetConnectionString("SystemPulse")));
 
         return services;
 

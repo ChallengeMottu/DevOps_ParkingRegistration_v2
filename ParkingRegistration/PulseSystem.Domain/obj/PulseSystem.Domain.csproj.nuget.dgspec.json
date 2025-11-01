@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\Dotnet\\ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\PulseSystem.Domain.csproj": {}
+    "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\devops\\DevOps ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\PulseSystem.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\Dotnet\\ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\PulseSystem.Domain.csproj": {
+    "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\devops\\DevOps ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\PulseSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\Dotnet\\ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\PulseSystem.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\devops\\DevOps ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\PulseSystem.Domain.csproj",
         "projectName": "PulseSystem.Domain",
-        "projectPath": "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\Dotnet\\ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\PulseSystem.Domain.csproj",
+        "projectPath": "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\devops\\DevOps ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\PulseSystem.Domain.csproj",
         "packagesPath": "C:\\Users\\gabis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\Dotnet\\ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\obj\\",
+        "outputPath": "C:\\Users\\gabis\\OneDrive - Fiap-Faculdade de Informática e Administração Paulista\\Área de Trabalho\\Challenge\\devops\\DevOps ParkingRegistration\\ParkingRegistration\\PulseSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
