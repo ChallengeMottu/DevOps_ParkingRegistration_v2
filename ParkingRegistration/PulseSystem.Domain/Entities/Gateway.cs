@@ -13,16 +13,16 @@ public class Gateway
     public long Id { get; set; }
     
     
-    public string Model {get; set;}
+    public string Model {get; set;} =string.Empty;
     
     
     public StatusGateway Status {get; set;}
     
     
-    public string MacAddress {get; set;}
+    public string MacAddress {get; set;} = string.Empty;
     
    
-    public string LastIP {get; set;}
+    public string LastIP {get; set;}= string.Empty;
     
     
     public DateTime RegisterDate {get; set;} = DateTime.Now;

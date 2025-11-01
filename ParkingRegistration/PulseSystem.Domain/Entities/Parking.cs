@@ -9,15 +9,15 @@ public class Parking
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public long Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } =string.Empty;
     public Address Location { get; set; }
     public decimal AvailableArea { get; set; }
     public int Capacity { get; set; }
     public DateTime RegisterDate { get; set; } = DateTime.Now;
     
-    public string structurePlan { get; set; }
+    public string structurePlan { get; set; } =string.Empty;
     
-    public string floorPlan { get; set; } 
+    public string floorPlan { get; set; } =string.Empty;
     public List<Zone> Zones { get; set; } = new List<Zone>();
     public List<Gateway> Gateways { get; set; } = new List<Gateway>();
 

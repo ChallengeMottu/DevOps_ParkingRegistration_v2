@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PulseSystem.Infraestructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7752be8ea560eb14e65b829f4dc3bc8aee8873bd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+156eff56d8ecd1a48067b3fc17f196eb3821d4f6")]
 [assembly: System.Reflection.AssemblyProductAttribute("PulseSystem.Infraestructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PulseSystem.Infraestructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
