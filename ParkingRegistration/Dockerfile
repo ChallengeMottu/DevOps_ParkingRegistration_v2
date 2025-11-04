@@ -10,7 +10,7 @@ WORKDIR /src
 COPY *.sln ./
 COPY PulseSystem.Application/*.csproj PulseSystem.Application/
 COPY PulseSystem.Domain/*.csproj PulseSystem.Domain/
-COPY PulseSystem.Infrastructure/*.csproj PulseSystem.Infrastructure/
+COPY PulseSystem.Infraestructure/*.csproj PulseSystem.Infrastructure/
 COPY PulseSystem.API/*.csproj PulseSystem.API/
 RUN dotnet restore "PulseSystem.API/PulseSystem.API.csproj"
 
