@@ -1,4 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
 RUN adduser --disabled-password --gecos "" appuser
@@ -7,13 +7,14 @@ USER appuser
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+
 COPY *.sln ./
 COPY PulseSystem.Application/*.csproj PulseSystem.Application/
 COPY PulseSystem.Domain/*.csproj PulseSystem.Domain/
 COPY PulseSystem.Infraestructure/*.csproj PulseSystem.Infraestructure/
 COPY PulseSystem.API/*.csproj PulseSystem.API/
-RUN dotnet restore "PulseSystem.API/PulseSystem.API.csproj"
 
+RUN dotnet restore "PulseSystem.API/PulseSystem.API.csproj"
 
 COPY . .
 WORKDIR /src/PulseSystem.API
