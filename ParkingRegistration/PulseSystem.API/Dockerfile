@@ -8,7 +8,7 @@ USER appuser
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["PulseSystem.API/PulseSystem.API.csproj", "PulseSystem.API/"]
+COPY ["PulseSystem.API.csproj", "./"]
 RUN dotnet restore "PulseSystem.API/PulseSystem.API.csproj"
 COPY . .
 WORKDIR "/src/PulseSystem.API"
