@@ -9,16 +9,19 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# Copia o arquivo .csproj (que está na mesma pasta do Dockerfile)
-COPY ["PulseSystem.API.csproj", "./"]
+# Copia os csproj individuais (de todas as camadas)
+COPY ["PulseSystem.API/PulseSystem.API.csproj", "PulseSystem.API/"]
+COPY ["PulseSystem.Application/PulseSystem.Application.csproj", "PulseSystem.Application/"]
+COPY ["PulseSystem.Domain/PulseSystem.Domain.csproj", "PulseSystem.Domain/"]
+COPY ["PulseSystem.Infrastructure/PulseSystem.Infrastructure.csproj", "PulseSystem.Infrastructure/"]
 
-# Restaura dependências
-RUN dotnet restore "PulseSystem.API.csproj"
+# Restaura as dependências
+RUN dotnet restore "PulseSystem.API/PulseSystem.API.csproj"
 
-# Copia o restante dos arquivos
+# Copia tudo
 COPY . .
 
-# Compila
+WORKDIR "/src/PulseSystem.API"
 RUN dotnet build "PulseSystem.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
