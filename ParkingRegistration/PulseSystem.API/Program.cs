@@ -38,7 +38,6 @@ public class Program
 
         app.UseMiddleware<ExceptionHandlingMiddleware>();
         app.UseSwaggerDocumentation();
-        app.UseHttpsRedirection();
         app.UseCors("AllowReactApp");
         app.UseAuthentication();
         app.UseAuthorization();
