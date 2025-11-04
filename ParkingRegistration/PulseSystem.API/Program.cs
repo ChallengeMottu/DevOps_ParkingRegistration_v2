@@ -28,6 +28,12 @@ public class Program
             });
         });
 
+        builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8080);
+});
+
+
         builder.Services.AddAppDbContext(builder.Configuration);
         builder.Services.AddRepositories();
         builder.Services.AddServices();
