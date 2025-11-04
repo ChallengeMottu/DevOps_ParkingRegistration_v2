@@ -10,10 +10,10 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
 # Copia os csproj individuais (de todas as camadas)
-COPY ["PulseSystem.API/PulseSystem.API.csproj", "PulseSystem.API/"]
-COPY ["PulseSystem.Application/PulseSystem.Application.csproj", "PulseSystem.Application/"]
-COPY ["PulseSystem.Domain/PulseSystem.Domain.csproj", "PulseSystem.Domain/"]
-COPY ["PulseSystem.Infrastructure/PulseSystem.Infrastructure.csproj", "PulseSystem.Infrastructure/"]
+COPY ["ParkingRegistration/PulseSystem.API/PulseSystem.API.csproj", "PulseSystem.API/"]
+COPY ["ParkingRegistration/PulseSystem.Application/PulseSystem.Application.csproj", "PulseSystem.Application/"]
+COPY ["ParkingRegistration/PulseSystem.Domain/PulseSystem.Domain.csproj", "PulseSystem.Domain/"]
+COPY ["ParkingRegistration/PulseSystem.Infrastructure/PulseSystem.Infrastructure.csproj", "PulseSystem.Infrastructure/"]
 
 # Restaura as dependências
 RUN dotnet restore "PulseSystem.API/PulseSystem.API.csproj"
