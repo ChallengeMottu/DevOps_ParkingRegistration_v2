@@ -8,11 +8,12 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY *.sln ./
-COPY PulseSystem.API/*.csproj PulseSystem.API/
 COPY PulseSystem.Application/*.csproj PulseSystem.Application/
 COPY PulseSystem.Domain/*.csproj PulseSystem.Domain/
 COPY PulseSystem.Infrastructure/*.csproj PulseSystem.Infrastructure/
+COPY PulseSystem.API/*.csproj PulseSystem.API/
 RUN dotnet restore "PulseSystem.API/PulseSystem.API.csproj"
+
 
 COPY . .
 WORKDIR /src/PulseSystem.API
