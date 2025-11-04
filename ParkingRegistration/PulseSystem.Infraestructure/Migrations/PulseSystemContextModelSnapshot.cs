@@ -2,8 +2,8 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Oracle.EntityFrameworkCore.Metadata;
 using PulseSystem.Infraestructure.Persistence;
 
 #nullable disable
@@ -20,153 +20,160 @@ namespace PulseSystem.Infraestructure.Migrations
                 .HasAnnotation("ProductVersion", "9.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            OracleModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("PulseSystem.Domain.Entities.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(10)");
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasMaxLength(150)
+                        .HasColumnType("VARCHAR(150)")
+                        .HasColumnName("Email");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasMaxLength(200)
+                        .HasColumnType("VARCHAR(200)")
+                        .HasColumnName("Password");
 
                     b.Property<string>("Role")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasMaxLength(50)
+                        .HasColumnType("VARCHAR(50)")
+                        .HasColumnName("Role");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees", t =>
-                        {
-                            t.ExcludeFromMigrations();
-                        });
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("PulseSystem.Domain.Entities.Gateway", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(19)");
+                        .HasColumnType("bigint");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("LastIP")
                         .IsRequired()
                         .HasMaxLength(15)
-                        .HasColumnType("VARCHAR2(15)");
+                        .HasColumnType("VARCHAR(15)");
 
                     b.Property<string>("MacAddress")
                         .IsRequired()
                         .HasMaxLength(17)
-                        .HasColumnType("VARCHAR2(17)");
+                        .HasColumnType("VARCHAR(17)");
 
-                    b.Property<decimal>("MaxCapacity")
-                        .HasColumnType("NUMBER");
+                    b.Property<int>("MaxCapacity")
+                        .HasColumnType("INT");
 
-                    b.Property<decimal>("MaxCoverageArea")
-                        .HasColumnType("NUMBER");
+                    b.Property<double>("MaxCoverageArea")
+                        .HasColumnType("FLOAT");
 
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("VARCHAR2(100)");
+                        .HasColumnType("VARCHAR(100)");
 
                     b.Property<long>("ParkingId")
-                        .HasColumnType("NUMBER(19)");
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasDefaultValueSql("SYSDATE");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<decimal>("Status")
-                        .HasColumnType("NUMBER");
+                    b.Property<int>("Status")
+                        .HasColumnType("INT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParkingId");
 
-                    b.ToTable("GATEWAYS", (string)null);
+                    b.ToTable("Gateways", (string)null);
                 });
 
             modelBuilder.Entity("PulseSystem.Domain.Entities.Parking", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(19)")
-                        .HasColumnName("ID");
+                        .HasColumnType("bigint")
+                        .HasColumnName("Id");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<decimal>("AvailableArea")
-                        .HasColumnType("NUMBER");
+                    b.Property<double>("AvailableArea")
+                        .HasColumnType("FLOAT");
 
-                    b.Property<decimal>("Capacity")
-                        .HasColumnType("NUMBER");
+                    b.Property<int>("Capacity")
+                        .HasColumnType("INT")
+                        .HasColumnName("Capacity");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("VARCHAR2(150)");
+                        .HasColumnType("VARCHAR(150)");
 
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("TIMESTAMP(7)")
-                        .HasDefaultValueSql("SYSDATE");
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
 
                     b.Property<string>("floorPlan")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("FloorPlan");
 
                     b.Property<string>("structurePlan")
                         .IsRequired()
-                        .HasColumnType("NVARCHAR2(2000)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("StructurePlan");
 
                     b.HasKey("Id");
 
-                    b.ToTable("PARKINGS", (string)null);
+                    b.ToTable("Parkings", (string)null);
                 });
 
             modelBuilder.Entity("PulseSystem.Domain.Entities.Zone", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("NUMBER(19)");
+                        .HasColumnType("bigint");
 
-                    OraclePropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("VARCHAR2(500)");
+                        .HasColumnType("VARCHAR(500)");
 
-                    b.Property<decimal>("Length")
-                        .HasColumnType("NUMBER");
+                    b.Property<double>("Length")
+                        .HasColumnType("FLOAT");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("VARCHAR2(100)");
+                        .HasColumnType("VARCHAR(100)");
 
                     b.Property<long>("ParkingId")
-                        .HasColumnType("NUMBER(19)");
+                        .HasColumnType("bigint");
 
-                    b.Property<decimal>("Width")
-                        .HasColumnType("NUMBER");
+                    b.Property<double>("Width")
+                        .HasColumnType("FLOAT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ParkingId");
 
-                    b.ToTable("ZONES", (string)null);
+                    b.ToTable("Zones", (string)null);
                 });
 
             modelBuilder.Entity("PulseSystem.Domain.Entities.Gateway", b =>
@@ -185,47 +192,47 @@ namespace PulseSystem.Infraestructure.Migrations
                     b.OwnsOne("PulseSystem.Domain.Entities.Address", "Location", b1 =>
                         {
                             b1.Property<long>("ParkingId")
-                                .HasColumnType("NUMBER(19)");
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("Cep")
                                 .IsRequired()
                                 .HasMaxLength(9)
-                                .HasColumnType("NVARCHAR2(9)")
+                                .HasColumnType("nvarchar(9)")
                                 .HasColumnName("Cep");
 
                             b1.Property<string>("City")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("NVARCHAR2(100)")
+                                .HasColumnType("nvarchar(100)")
                                 .HasColumnName("City");
 
                             b1.Property<string>("Complement")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("NVARCHAR2(50)")
+                                .HasColumnType("nvarchar(50)")
                                 .HasColumnName("Complement");
 
                             b1.Property<string>("Neighborhood")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("NVARCHAR2(100)")
+                                .HasColumnType("nvarchar(100)")
                                 .HasColumnName("Neighborhood");
 
                             b1.Property<string>("State")
                                 .IsRequired()
                                 .HasMaxLength(50)
-                                .HasColumnType("NVARCHAR2(50)")
+                                .HasColumnType("nvarchar(50)")
                                 .HasColumnName("State");
 
                             b1.Property<string>("Street")
                                 .IsRequired()
                                 .HasMaxLength(100)
-                                .HasColumnType("NVARCHAR2(100)")
+                                .HasColumnType("nvarchar(100)")
                                 .HasColumnName("Street");
 
                             b1.HasKey("ParkingId");
 
-                            b1.ToTable("PARKINGS");
+                            b1.ToTable("Parkings");
 
                             b1.WithOwner()
                                 .HasForeignKey("ParkingId");

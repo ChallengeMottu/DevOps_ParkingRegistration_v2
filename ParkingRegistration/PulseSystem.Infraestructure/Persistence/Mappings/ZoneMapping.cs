@@ -8,30 +8,30 @@ namespace PulseSystem.Infraestructure.Persistence.Mappings
     {
         public void Configure(EntityTypeBuilder<Zone> builder)
         {
-            
-            builder.ToTable("ZONES");
+            builder.ToTable("Zones");
 
-            
+            // Chave primária
             builder.HasKey(z => z.Id);
 
+            // Propriedades
             builder.Property(z => z.Name)
                 .IsRequired()
                 .HasMaxLength(100)
-                .HasColumnType("VARCHAR2(100)"); 
+                .HasColumnType("VARCHAR(100)");
 
             builder.Property(z => z.Description)
                 .HasMaxLength(500)
-                .HasColumnType("VARCHAR2(500)"); 
+                .HasColumnType("VARCHAR(500)");
 
             builder.Property(z => z.Width)
                 .IsRequired()
-                .HasColumnType("NUMBER"); 
+                .HasColumnType("FLOAT"); // ou DECIMAL(10,2) caso seja uma medida com casas decimais
 
             builder.Property(z => z.Length)
                 .IsRequired()
-                .HasColumnType("NUMBER"); 
+                .HasColumnType("FLOAT"); // ou DECIMAL(10,2)
 
-
+            // Relacionamento com Parking
             builder.HasOne(z => z.Parking)
                 .WithMany(p => p.Zones)
                 .HasForeignKey(z => z.ParkingId)

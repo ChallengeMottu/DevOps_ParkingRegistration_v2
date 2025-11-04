@@ -1,1 +1,11 @@
-{"Version":1,"Hash":"UNWUvw44mzyNBAn50+PrrFYJx/+TUyI04GjDrhWunk8=","Source":"PulseSystem.API","BasePath":"_content/PulseSystem.API","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "BqJYwf3SGMAK3RPqdsn86wBC4iAxkcM96bPd2oOjUSA=",
+  "Source": "PulseSystem.API",
+  "BasePath": "_content/PulseSystem.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

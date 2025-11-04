@@ -9,9 +9,9 @@ namespace PulseSystem.Configuration
         public static void AddHealthChecksConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddHealthChecks()
-                .AddOracle(
+                .AddSqlServer(
                     connectionString: configuration.GetConnectionString("SystemPulse"),
-                    name: "Banco de Dados Oracle",
+                    name: "Banco de Dados Azure SQL Server",
                     failureStatus: Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy);
         }
 
