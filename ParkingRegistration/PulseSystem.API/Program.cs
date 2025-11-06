@@ -34,6 +34,9 @@ public class Program
 });
 
 
+        builder.Services.AddSingleton<HateoasConfig>();
+
+
         builder.Services.AddAppDbContext(builder.Configuration);
         builder.Services.AddRepositories();
         builder.Services.AddServices();
