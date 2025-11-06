@@ -41,7 +41,7 @@ Essa abordagem segue princípios do **Domain-Driven Design (DDD)** e **Clean Arc
 - **Swagger / OpenAPI**
 - **Banco de dados Oracle**
 - **Paginação**
-- JWT Token
+- **JWT Token**
 
 ---
 
