@@ -41,7 +41,9 @@ Essa abordagem segue princípios do **Domain-Driven Design (DDD)** e **Clean Arc
 - **Swagger / OpenAPI**
 - **Banco de dados Oracle**
 - **Paginação**
-- **JWT Token**
+- **JWT Bearer Authentication**
+- **xUnit**
+- **ML .NET**
 
 ---
 
@@ -84,199 +86,94 @@ http://localhost:5000/swagger
 
 ---
 
-## ✅ Casos de Teste (API Endpoints)
+## 🔗 Conexão com banco PaaS para deploy
 
-Abaixo estão exemplos de requisições para testar os principais recursos da API (`Gateways`, `Parkings` e `Zones`).
+Para realização do deploy da aplicação, a aplicação foi adaptada para se conectar ao banco Azure SQL Database, criado na plataforma azure.
 
-### 🚗 Parking (Pátios)
+**Passo a passo de conexão:**
 
-#### ➕ Criar Parking (POST)
-```http
-POST /parkings
-Content-Type: application/json
+1. Configuração da ConnectionString (appsettings.json):
+```bash
+"ConnectionStrings": {
+    "SystemPulse": "$(urlConnection)"
 
-{
-  "name": "Pátio Central",
-  "location": {
-    "street": "Rua A",
-    "complement": "Próximo ao mercado",
-    "neighborhood": "Centro",
-    "cep": "12345-678",
-    "city": "São Paulo",
-    "state": "SP"
-  },
-  "availableArea": 5000,
-  "capacity": 300
-}
+  }
 ```
 
-#### 📋 Listar Todos (GET)
-```http
-GET /parkings?pageNumber=1&pageSize=10
+2. Criação das tabelas no banco:
+Esse passo pode ser feito de duas formas, a primeira é criar as tabelas por migration localmente, e a segunda forma é criar as tabelas manualmente
+na ferramenta "Query Editor" dentro do Azure.
+
+Caso prefira criar manualmente, execute esses comandos SQL:
+```bash
+CREATE TABLE [dbo].[Employees]
+(
+    [Id] INT IDENTITY(1,1) NOT NULL,
+    [Email] VARCHAR(150) NOT NULL,
+    [Password] VARCHAR(200) NOT NULL,
+    [Role] VARCHAR(50) NOT NULL,
+
+    CONSTRAINT [PK_Employees] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [dbo].[Gateways]
+(
+    [Id] INT IDENTITY(1,1) NOT NULL,
+    [Model] VARCHAR(100) NOT NULL,
+    [Status] INT NOT NULL,
+    [MacAddress] VARCHAR(17) NOT NULL,
+    [LastIP] VARCHAR(15) NOT NULL,
+    [RegisterDate] DATETIME NOT NULL DEFAULT(GETDATE()),
+    [MaxCoverageArea] FLOAT NOT NULL,
+    [MaxCapacity] INT NOT NULL,
+    [ParkingId] INT NOT NULL,
+
+    CONSTRAINT [PK_Gateways] PRIMARY KEY ([Id]),
+
+    CONSTRAINT [FK_Gateways_Parking]
+        FOREIGN KEY ([ParkingId])
+        REFERENCES [dbo].[Parking]([Id])
+        ON DELETE CASCADE
+);
+
+CREATE TABLE [dbo].[Parkings]
+(
+    [Id] INT IDENTITY(1,1) NOT NULL,
+    [Name] VARCHAR(150) NOT NULL,
+    [AvailableArea] FLOAT NOT NULL,
+    [Capacity] INT NOT NULL,
+    [RegisterDate] DATETIME NOT NULL DEFAULT(GETDATE()),
+    [StructurePlan] VARBINARY(MAX) NOT NULL,
+    [FloorPlan] VARBINARY(MAX) NOT NULL,
+
+    -- Owned Type: Location
+    [Street] VARCHAR(100) NOT NULL,
+    [Complement] VARCHAR(50) NULL,
+    [Neighborhood] VARCHAR(100) NOT NULL,
+    [City] VARCHAR(100) NOT NULL,
+    [State] VARCHAR(50) NOT NULL,
+    [Cep] VARCHAR(9) NOT NULL,
+
+    CONSTRAINT [PK_Parkings] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [dbo].[Zones]
+(
+    [Id] INT IDENTITY(1,1) NOT NULL,
+    [Name] VARCHAR(100) NOT NULL,
+    [Description] VARCHAR(500) NULL,
+    [Width] FLOAT NOT NULL,
+    [Length] FLOAT NOT NULL,
+    [ParkingId] INT NOT NULL,
+
+    CONSTRAINT [PK_Zones] PRIMARY KEY ([Id]),
+
+    CONSTRAINT [FK_Zones_Parkings]
+        FOREIGN KEY ([ParkingId])
+        REFERENCES [dbo].[Parkings]([Id])
+        ON DELETE CASCADE
+);
 ```
-
-#### 🔍 Buscar por ID (GET)
-```http
-GET /parkings/{id_parking}
-```
-
-#### ✏️ Atualizar Parking (PUT)
-```http
-PUT /parkings/{id_parking}
-Content-Type: application/json
-
-{
-  "name": "Pátio Central Atualizado",
-  "location": {
-    "street": "Rua B",
-    "complement": "Ao lado da escola",
-    "neighborhood": "Centro",
-    "cep": "12345-678",
-    "city": "São Paulo",
-    "state": "SP"
-  },
-  "availableArea": 6000,
-  "capacity": 350
-}
-
-```
-
-#### ❌ Deletar Parking (DELETE)
-```http
-DELETE /parkings/{id_parking}
-```
----
-
-### 📡 Gateways
-
-#### ➕ Criar Gateway (POST)
-```http
-POST /gateways
-Content-Type: application/json
-
-{
-  "model": "Pulse-GTW-01",
-  "status": 1,
-  "macAddress": "00:1B:44:11:3A:B7",
-  "lastIP": "192.168.0.15",
-  "parkingId": {id_gateway}
-}
-
-```
-
-#### 📋 Listar Todos (GET)
-```http
-GET /gateways?pageNumber=1&pageSize=10
-```
-
-### 🔍 Buscar por ID (GET)
-```http
-GET /gateways/{id_gateway}
-```
-
-#### 🔍 Buscar por MAC Address (GET)
-```http
-GET /gateways/mac/00:1B:44:11:3A:B7
-```
-
-#### ✏️ Atualizar Gateway (PUT)
-```http
-PUT /gateways/1
-Content-Type: application/json
-
-{
-  "model": "Pulse-GTW-02",
-  "status": 1,
-  "macAddress": "00:1B:44:11:3A:B7",
-  "lastIP": "192.168.0.20",
-  "parkingId": 1
-}
-```
-
-#### ❌ Deletar Gateway (DELETE)
-```http
-DELETE /gateways/{id_gateway}
-```
----
-
-### 🏷 Zones
-
-#### ➕ Criar Zone (POST)
-```http
-POST /zones
-Content-Type: application/json
-
-{
-  "name": "Zona A",
-  "description": "Zona principal",
-  "width": 25,
-  "length": 50,
-  "parkingId": 1
-}
-```
-
-#### 📋 Listar Todas (GET)
-```http
-GET /zones?pageNumber=1&pageSize=10
-```
-
-#### 🔍 Buscar por ID (GET)
-```http
-GET /zones/{id_zone}
-```
-
-#### 📍 Buscar por Parking ID (GET)
-```http
-GET /zones/parking/{id_parking}
-```
-
-#### ✏️ Atualizar Zone (PUT)
-```http
-PUT /zones/{id_zone}
-Content-Type: application/json
-
-{
-  "name": "Zona A Atualizada",
-  "description": "Zona reformada",
-  "width": 30,
-  "length": 55,
-  "parkingId": 1
-}
-```
-
-#### ❌ Deletar Zone (DELETE)
-```http
-DELETE /zones/{id_zone}
-```
-
----
-
-## 📡 Status Codes da API
-
-A aplicação segue os **padrões RESTful** e retorna os **status codes HTTP** adequados para cada operação.  
-Isso facilita a integração com clientes externos e garante clareza nas respostas.
-
-### 🔑 Status Codes Utilizados
-
-- **200 OK** → Requisição bem-sucedida (usado em operações de consulta e atualização).  
-- **201 Created** → Recurso criado com sucesso (usado em operações `POST`).  
-- **204 No Content** → Recurso deletado com sucesso, sem corpo de resposta.  
-- **400 Bad Request** → Erro de validação ou requisição malformada (ex: campos obrigatórios ausentes).  
-- **404 Not Found** → Recurso não encontrado (ex: ID inexistente).  
-- **422 Unprocessable Entity** → Quando a requisição foi entendida, mas contém erros de validação semântica (ex: medidas inválidas para zonas).  
-- **500 Internal Server Error** → Erro inesperado no servidor.  
-
-### 📝 Exemplo de Resposta com Erro
-
-```json
-{
-  "status": 422,
-  "error": "Unprocessable Entity",
-  "message": "As medidas da zona não podem exceder a área disponível do pátio.",
-  "path": "/zones"
-}
-```
-
 ---
 
 ## 👩‍💻 Grupo Desenvolvedor
